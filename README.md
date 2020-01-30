@@ -1,12 +1,5 @@
-last upload: 2019/11/14 7:00
+居然被扒後台了(((ﾟДﾟ;)))！！
 
----
-## List /
-#### uploaded: DCcontents, akam010
-#### written in vs: Homepage
-#### next: finish akam articles, finish DCcontents, finish HomePage?, upload Homepage???
+主頁還沒做好所以還沒放啦！目前就只有柯南，就是你看到的這些！
 
----
-
-DCcontent的back to home連結已切斷
-搬運中（）
+> https://star22fall22.github.io/LightInk-Derivative/DC.html
