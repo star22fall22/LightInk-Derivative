@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-  <title>待墨濃時 - DC名偵探柯南</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>待墨濃時 - DC名偵探柯南</title>
     <link rel="icon" href="./img/icon.ico" type="image/x-icon">
 
-  <!-- load CSS -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
-  <link rel="stylesheet" href="css/templatemo-style.css">                                     <!-- Templatemo style -->
+    <!-- load CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/templatemo-style.css">                                     <!-- Templatemo style -->
+    <link href="./album/bootstrap.min.css" rel="stylesheet">
+    <link href="./album/flexslider.css" rel="stylesheet">
+    <link href="./album/prettyPhoto.css" rel="stylesheet">
+    <link href="./album/style.css" rel="stylesheet">
+    <script src="./album/all.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./album/common.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./album/util.js"></script>
 
-  
 
-  <script>
-    var renderPage = true;
+    <script>
+        var renderPage = true;
 
-    if(navigator.userAgent.indexOf('MSIE')!==-1
-      || navigator.appVersion.indexOf('Trident/') > 0){
-        /* Microsoft Internet Explorer detected in. */
-        alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
-        renderPage = false;
-    }
-  </script>
+        if (navigator.userAgent.indexOf('MSIE') !== -1
+            || navigator.appVersion.indexOf('Trident/') > 0) {
+            /* Microsoft Internet Explorer detected in. */
+            alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+            renderPage = false;
+        }
+    </script>
 
 </head>
 
@@ -78,8 +84,8 @@
 
 
                         <!-- 新增目錄備用
-                             <p><a href="#">【赤安極短】依然相伴</a>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2">2019.10.17</font></p>
-    -->
+                                             <p><a href="#">【赤安極短】依然相伴</a>&nbsp;&nbsp;&nbsp;&nbsp;<font size="2">2019.10.17</font></p>
+                    -->
                         <br /><br />
                         <a href="./index.html" class="btn btn-primary tm-md-align-center">Back to Home</a>
                         <p>&nbsp;</p>
@@ -91,6 +97,46 @@
             </div>
         </section>
 
+        <!--相簿部分-->
+        <section id="workArea" class="text-center">
+            <div class="container">
+                <div class="row">
+                    <div >
+                        <h5 class="mb-4 tm-text-color-primary">&emsp;&emsp;▍ Image</h5>
+                    </div>
+                </div>
+                <ul id="Grid" class="row">
+                    <li class="mix webdesign col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img001.png" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img001.png" class="img-responsive"><span>2021.12.21 蝴蝶結貝斯袋</span></a>
+                    </li>
+                    <li class="mix printing col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img007.jpg" data-rel="prettyPhoto"><img alt="相片說明" src="././img/DC/img007.jpg" class="img-responsive"><span>2021.11.11 光棍節</span></a>
+                    </li>
+                    <li class="mix development col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img008.jpg" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img008.jpg" class="img-responsive"><span>2021.10.17 不可以色色</span></a>
+                    </li>
+                    <li class="mix webdesign col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img002.jpg" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img002.jpg" class="img-responsive"><span>2021.6.5 學士服阿姆努伊</span></a>
+                    </li>
+                    <li class="mix development col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img003.png" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img003.png" class="img-responsive"><span>2021.5.25 居家工作好夥伴</span></a>
+                    </li>
+                    <li class="mix printing col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img004.jpg" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img004.jpg" class="img-responsive"><span>2021.4.27 帶著阿卡努伊看電影</span></a>
+                    </li>
+                    <li class="mix webdesign col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img005.jpg" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img005.jpg" class="img-responsive"><span>2021.3.25 場次無料小卡</span></a>
+                    </li>
+                    <li class="mix development col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img009.gif" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img009.gif" class="img-responsive"><span>2022.1.14 ㄉㄨㄞ井</span></a>
+                    </li>
+                    <li class="mix printing col-sm-4 mix_all" style="display: block;  opacity: 1;">
+                        <a href="./img/DC/img010.gif" data-rel="prettyPhoto"><img alt="相片說明" src="./img/DC/img010.gif" class="img-responsive"><span>2022.1.14 ㄉㄨㄞ零</span></a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--相簿部分-->
 
 
         <!-- 6th Section -->
@@ -102,7 +148,7 @@
         <!-- Footer -->
         <div class="row">
             <div class="col-lg-12">
-                <p class="text-center small tm-copyright-text mb-0">Last edit 2022/3/14 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> Your Company Name | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+                <p class="text-center small tm-copyright-text mb-0">Last edit 2022/6/26 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> Your Company Name | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
             </div>
         </div>
     </div>
