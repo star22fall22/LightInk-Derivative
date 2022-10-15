@@ -1,0 +1,43 @@
+*, *::before, *::after {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background-color: #616267;
+    display: grid;
+    /*/grid-template-columns: 1fr 1fr;*/
+    align-items: center;
+    justify-items: center;
+    min-height: 100vh;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+}
+
+
+.thing {
+    margin: 50px;
+    width: 252px;
+    height: 360px;
+    overflow: hidden;
+    box-shadow: 20px 20px 30px #00000099;
+    transition: transform 1s, box-shadow 1s;
+    transition-timing-function: ease-in-out;
+    
+}
+
+.thing:hover {
+    transform-origin: center;
+    transform: rotateX(20deg) rotateY(-35deg);
+}
+
+.thing:hover{
+    box-shadow: 80px 60px 80px #00000066;
+}
+
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
