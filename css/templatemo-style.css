@@ -123,6 +123,8 @@ h2 { font-size: 1.8rem; }
     border: 1px solid #666666;
     width: 100%;
     max-width: 340px;
+    max-height: 480px;
+    min-height: 480px;
 }
 
 .tm-pricing-header {
