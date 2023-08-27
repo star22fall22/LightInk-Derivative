@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>待墨濃時 - DPI與稿件尺寸計算機</title>
+  <link rel="icon" href="../../img/icon.ico" type="image/x-icon">
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="../../css/templatemo-style.css">                                     <!-- Templatemo style -->
+  <script src="../../js/convertDPI.js"></script>
+
+  <script>
+    var renderPage = true;
+
+    if(navigator.userAgent.indexOf('MSIE')!==-1
+      || navigator.appVersion.indexOf('Trident/') > 0){
+        /* Microsoft Internet Explorer detected in. */
+        alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+        renderPage = false;
+    }
+  </script>
+
+  <style>
+    #storyBox{
+      height: 272px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+  <div class="container">
+
+      <p>&nbsp;</p>
+
+      <!-- 6th Section -->
+<section class="row">
+  <div class="col-lg-12 tm-form-header pl-5 pr-5">
+    <h2 class="tm-container-inner tm-text-color-white">DPI與稿件尺寸計算機</h2>
+  </div>
+  <div class="col-lg-12 pl-2 pl-sm-3 pl-md-5 pr-2 pr-sm-3 pr-md-5">
+    <form action="#" method="get" class="row tm-container-inner tm-contact-form">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <p>&#10112; 紙張尺寸 + 解析度 &rarr; 檔案大小</p>
+          <input type="text" id="mm_1" autocomplete="off" class="form-control" placeholder="紙張尺寸（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="dpi_1" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="px_1" autocomplete="off" class="form-control" placeholder="檔案大小（px）" disabled/>
+        </div>
+        <br>
+        <div class="form-group">
+          <p>&#10113; 檔案大小 + 解析度 &rarr; 紙張尺寸</p>
+          <input type="text" id="px_2" autocomplete="off" class="form-control" placeholder="檔案大小（px）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="dpi_2" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="mm_2" autocomplete="off" class="form-control" placeholder="紙張尺寸（mm）" disabled/>
+        </div>
+        <br>
+        <div class="form-group">
+          <p>&#10114; 紙張尺寸 + 檔案大小 &rarr; 解析度</p>
+          <input type="text" id="mm_3" autocomplete="off" class="form-control" placeholder="紙張尺寸（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="px_3" autocomplete="off" class="form-control" placeholder="檔案大小（px）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="dpi_3" autocomplete="off" class="form-control" placeholder="解析度（dpi）" disabled/>
+        </div>
+        
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <p>&#10070; 印刷類別</p>
+          <select id = "print_type">
+            <option value="choose">請選擇</option>
+            <option value="onePage">【單張】名片、卡片、海報</option>
+            <option value="twoPage">【書籍】膠裝、騎馬釘</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" id="h_4" autocomplete="off" class="form-control" placeholder="高度（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="w_4" autocomplete="off" class="form-control" placeholder="寬度（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="back_4" autocomplete="off" class="form-control" placeholder="書背尺寸（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="fold_4" autocomplete="off" class="form-control" placeholder="折口尺寸（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="bleed_4" autocomplete="off" class="form-control" placeholder="出血尺寸（mm）"/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="dpi_4" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+        </div>
+        <!--
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <label>
+                <input type="radio" name="gender" value="m" required> Male
+              </label>
+            </div>
+            <div class="col-lg-6">
+              <label>
+                <input type="radio" name="gender" value="f" required> Female
+              </label>
+            </div>
+          </div>
+        </div>
+        -->
+        <div class="form-group">
+          <textarea id="outputBox" class="form-control" rows="6" placeholder="檔案大小（px）" required disabled></textarea>
+        </div>
+      </div>
+      <div class="col-xs-12 mt-4 tm-center">
+        <button type="submit" class="btn btn-primary" onclick="convertDPI()"><font size="4">換算</font></button>
+      </div>
+      <!--
+      <div class="col-xs-12 mt-4 tm-center">
+        <a href="#" class="btn btn-primary tm-md-align-center" onclick="createStory()"><font size="4">生成故事</font></a>
+      </div>
+      -->
+    </form>
+  </div>
+  <div class="col-lg-12 tm-bg-color-gray tm-text-color-white tm-font-thin tm-form-footer">
+    <div class="row tm-container-inner">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <h4></h4>
+          <address></address>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- Footer -->
+      <div class="row">
+          <div class="col-lg-12">
+              <p class="text-center small tm-copyright-text mb-0">Last edit 2023/8/26 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> star_fall22 | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+          </div>
+      </div>
+  </div>
+<!-- load JS -->
+<script src="../../js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+<script>
+
+  /* DOM is ready
+  ------------------------------------------------*/
+  $(function(){
+
+    if(renderPage) {
+      $('body').addClass('loaded');
+    }
+
+    $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+  });
+
+</script>
+
+</body>
+</html>
