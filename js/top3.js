@@ -27,18 +27,35 @@ createImg = function() {
         ctx.fillText(top2, 250, 1240); // 修改文字内容和位置
         ctx.fillText(top3, 250, 1540); // 修改文字内容和位置
 
+        //展示圖片
+        document.getElementById("canvasCont").style.display = "unset";
+
         // 可下載圖片
         const dwnButton = document.getElementById("dwnButton");
         dwnButton.disabled = false;
+
+        //畫面滾到canvas
+        canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 };
 
 dwnImg = function() {
+    // 创建一个 Date 对象，它将包含当前的日期和时间
+    var currentDate = new Date();
+
+    // 获取当前的年份、月份、日期、小时、分钟和秒
+    var year = String(currentDate.getFullYear()).substr(2,2);
+    var month = String(currentDate.getMonth() + 1).padStart(2, "0");; // 月份从 0 开始，所以要加 1
+    var day = String(currentDate.getDate()).padStart(2, "0");;
+    var hours = String(currentDate.getHours()).padStart(2, "0");;
+    var minutes = String(currentDate.getMinutes()).padStart(2, "0");;
+    var seconds = String(currentDate.getSeconds()).padStart(2, "0");;
+
     var canvas = document.getElementById('myCanvas');
     var dataURL = canvas.toDataURL('image/jpeg');
     var a = document.createElement('a');
     a.href = dataURL;
-    a.download = 'canvas_image.jpg';
+    a.download = 'top3_'+ year + month + day + hours + minutes + seconds + '.jpg';
     a.click();
 };
   
