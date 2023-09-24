@@ -1,7 +1,7 @@
 createImg = function() {
     // 获取Canvas元素和上下文
-    const canvas = document.getElementById('myCanvas');
-    const ctx = canvas.getContext('2d');
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
 
     //取得top3文字
     var top1 = document.getElementById("top1").value.substr(0,9);
@@ -26,5 +26,19 @@ createImg = function() {
         ctx.fillText(top1, 250, 940); // 修改文字内容和位置
         ctx.fillText(top2, 250, 1240); // 修改文字内容和位置
         ctx.fillText(top3, 250, 1540); // 修改文字内容和位置
+
+        // 可下載圖片
+        const dwnButton = document.getElementById("dwnButton");
+        dwnButton.disabled = false;
     };
 };
+
+dwnImg = function() {
+    var canvas = document.getElementById('myCanvas');
+    var dataURL = canvas.toDataURL('image/jpeg');
+    var a = document.createElement('a');
+    a.href = dataURL;
+    a.download = 'canvas_image.jpg';
+    a.click();
+};
+  
