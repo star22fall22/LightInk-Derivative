@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>待墨濃時 - Top 3 產生器</title>
+  <link rel="icon" href="../../img/icon.ico" type="image/x-icon">
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="../../css/templatemo-style.css">                                     <!-- Templatemo style -->
+  <script src="../../js/top3.js"></script>
+
+  <script>
+    var renderPage = true;
+
+    if(navigator.userAgent.indexOf('MSIE')!==-1
+      || navigator.appVersion.indexOf('Trident/') > 0){
+        /* Microsoft Internet Explorer detected in. */
+        alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+        renderPage = false;
+    }
+  </script>
+
+  <style>
+    #storyBox{
+      height: 272px;
+      user-select: none;
+    }
+    #canvasCont{
+      width: 300px;
+    }
+    @media only screen and (max-width:767px) {
+      #canvasCont { padding: 30px 25px; }
+    }
+    #myCanvas {
+      width: 100%; /* Canvas宽度为div的100% */
+      height: auto; /* 让Canvas的高度自动调整以保持纵横比 */
+      display: block; /* 去除默认的行内元素样式 */
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+  <div class="container">
+
+      <p>&nbsp;</p>
+
+      <!-- 6th Section -->
+<section class="row">
+  <div class="col-lg-12 tm-form-header pl-5 pr-5">
+    <h2 class="tm-container-inner tm-text-color-white">Top 3 產生器</h2>
+  </div>
+  <div class="col-lg-12 pl-2 pl-sm-3 pl-md-5 pr-2 pr-sm-3 pr-md-5">
+    <form action="#" method="get" class="row tm-container-inner tm-contact-form">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <input type="text" id="top1" autocomplete="off" class="form-control" placeholder="Top 1" required/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="top2" autocomplete="off" class="form-control" placeholder="Top 2" required/>
+        </div>
+        <div class="form-group">
+          <input type="text" id="top3" autocomplete="off" class="form-control" placeholder="Top 3" required/>
+        </div>
+        <div class="form-group">
+          <select id="theme">
+            <option value="light_orange">葡萄柚汽水</option>
+            <option value="dark_green">日式焙茶</option>
+            <option value="light_green">初春暖風</option>
+            <option value="light_purple">葡萄汁</option>
+            <option value="light_blue">夏日青空</option>
+            <option value="dark_blue">無盡宇宙</option>
+            <option value="dark_red">血紅夕陽</option>
+            <option value="light_gray">銀河灰</option>
+          </select>
+        </div>
+        <div class="col-xs-12 mt-4 tm-center">
+          <button type="submit" class="btn btn-primary" onclick="createImg()"><font size="4">生成圖片</font></button>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="canvasCont">
+        <!-- <canvas id="myCanvas" width="342" height="608"></canvas> -->
+        <canvas id="myCanvas" width="1080" height="1920"></canvas>
+      </div>
+      
+      <!--
+      <div class="col-xs-12 mt-4 tm-center">
+        <a href="#" class="btn btn-primary tm-md-align-center" onclick="createStory()"><font size="4">生成故事</font></a>
+      </div>
+      -->
+    </form>
+  </div>
+  <div class="col-lg-12 tm-bg-color-gray tm-text-color-white tm-font-thin tm-form-footer">
+    <div class="row tm-container-inner">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <h4></h4>
+          <address></address>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- Footer -->
+      <div class="row">
+          <div class="col-lg-12">
+              <p class="text-center small tm-copyright-text mb-0">Last edit 2023/9/24 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> star_fall22 | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+          </div>
+      </div>
+  </div>
+<!-- load JS -->
+<script src="../../js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+<script>
+
+  /* DOM is ready
+  ------------------------------------------------*/
+  $(function(){
+
+    if(renderPage) {
+      $('body').addClass('loaded');
+    }
+
+    $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+  });
+
+</script>
+
+</body>
+</html>
