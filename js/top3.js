@@ -1,4 +1,7 @@
 createImg = function() {
+    var loader = document.getElementById("loader2");
+    loader.style.display = "block";
+
     // 获取Canvas元素和上下文
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext('2d');
@@ -36,6 +39,7 @@ createImg = function() {
 
         //畫面滾到canvas
         canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        loader.style.display = "none";
     };
 };
 
@@ -57,5 +61,7 @@ dwnImg = function() {
     a.href = dataURL;
     a.download = 'top3_'+ year + month + day + hours + minutes + seconds + '.jpg';
     a.click();
+
+    canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
   
