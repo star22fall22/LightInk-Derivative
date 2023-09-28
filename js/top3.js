@@ -46,7 +46,7 @@ createImg = function() {
 dwnImg = function() {
     // 创建一个 Date 对象，它将包含当前的日期和时间
     var currentDate = new Date();
-
+    
     // 获取当前的年份、月份、日期、小时、分钟和秒
     var year = String(currentDate.getFullYear()).substr(2,2);
     var month = String(currentDate.getMonth() + 1).padStart(2, "0");; // 月份从 0 开始，所以要加 1
@@ -54,13 +54,15 @@ dwnImg = function() {
     var hours = String(currentDate.getHours()).padStart(2, "0");;
     var minutes = String(currentDate.getMinutes()).padStart(2, "0");;
     var seconds = String(currentDate.getSeconds()).padStart(2, "0");;
-
+    
     var canvas = document.getElementById('myCanvas');
     var dataURL = canvas.toDataURL('image/jpeg');
     var a = document.createElement('a');
     a.href = dataURL;
     a.download = 'top3_'+ year + month + day + hours + minutes + seconds + '.jpg';
-    a.click();
+    // a.click();
+    var myimg = document.getElementById('imgtest')
+    myimg.src=dataURL
 
     canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
