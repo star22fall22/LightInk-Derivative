@@ -15,11 +15,11 @@ createImg = function() {
 
     //取得主題
     var theme = document.getElementById("theme");
-    theme_value = theme.value
+    var typesetting = document.getElementById("typesetting"); 
 
     // 创建一个Image对象来加载jpg底图
     const backgroundImage = new Image();
-    backgroundImage.src = '../../img/tool-top3/'+String(theme.value)+'.jpg'; // 将文件名替换为您的底图文件名
+    backgroundImage.src = '../../img/tool-top3/'+String(theme.value)+'_' + String(typesetting.value) +'.jpg'; // 将文件名替换为您的底图文件名
 
     // 在图像加载完成后绘制它
     backgroundImage.onload = function() {
