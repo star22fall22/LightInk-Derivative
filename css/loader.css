@@ -20,7 +20,7 @@
   transform: rotate(45deg) translate(30%, 40%);
   background: #c25454;
   box-shadow: 32px -34px 0 5px #993333;
-  animation: slide 2s infinite ease-in-out alternate;
+  animation: slide 1s infinite ease-in-out alternate;
 }
 .loader2:after {
   content: "";
@@ -33,7 +33,7 @@
   background: #993333;
   transform: rotate(0deg);
   transform-origin: 35px 145px;
-  animation: rotate 2s infinite ease-in-out;
+  animation: rotate 1s infinite ease-in-out;
 }
 
 @keyframes slide {
