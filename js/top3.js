@@ -31,7 +31,10 @@ createImg = function() {
         ctx.fillText(top3, 250, 1540); // 修改文字内容和位置
 
         //展示圖片
+        var dataURL = canvas.toDataURL('image/jpeg');
         document.getElementById("canvasCont").style.display = "unset";
+        var myimg = document.getElementById('imgtest')
+        myimg.src=dataURL
 
         // 可下載圖片
         const dwnButton = document.getElementById("dwnButton");
@@ -60,9 +63,9 @@ dwnImg = function() {
     var a = document.createElement('a');
     a.href = dataURL;
     a.download = 'top3_'+ year + month + day + hours + minutes + seconds + '.jpg';
-    // a.click();
-    var myimg = document.getElementById('imgtest')
-    myimg.src=dataURL
+    a.click();
+    // var myimg = document.getElementById('imgtest')
+    // myimg.src=dataURL
 
     canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
