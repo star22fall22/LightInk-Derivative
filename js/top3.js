@@ -46,8 +46,8 @@ createImg = function() {
         overlay.style.display = "none";
         loader.style.display = "none";
 
-        //畫面滾到canvas
-        canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        //畫面滾到imgtest
+        myimg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         loader.style.display = "none";
     };
 };
