@@ -1,6 +1,8 @@
 createImg = function() {
     var loader = document.getElementById("loader2");
-    loader.style.display = "block";
+    var overlay = document.getElementById("overlay")
+    loader.style.display = "flex";
+    overlay.style.display = "flex";
 
     // 获取Canvas元素和上下文
     var canvas = document.getElementById('myCanvas');
@@ -39,6 +41,10 @@ createImg = function() {
         // 可下載圖片
         const dwnButton = document.getElementById("dwnButton");
         dwnButton.disabled = false;
+
+        //加載結束
+        overlay.style.display = "none";
+        loader.style.display = "none";
 
         //畫面滾到canvas
         canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
