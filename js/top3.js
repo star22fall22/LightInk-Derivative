@@ -28,9 +28,17 @@ createImg = function() {
         // 添加文字
         ctx.font = 'bold 72px 微軟正黑體';
         ctx.fillStyle = 'white';
-        ctx.fillText(top1, 250, 940); // 修改文字内容和位置
-        ctx.fillText(top2, 250, 1240); // 修改文字内容和位置
-        ctx.fillText(top3, 250, 1540); // 修改文字内容和位置
+        if (typesetting.value == 'books'){
+            ctx.fillText(top1, 250, 1150); // 修改文字内容和位置
+            ctx.fillText(top2, 250, 1440); // 修改文字内容和位置
+            ctx.fillText(top3, 250, 1740); // 修改文字内容和位置
+        }
+        else{
+            ctx.fillText(top1, 250, 940); // 修改文字内容和位置
+            ctx.fillText(top2, 250, 1240); // 修改文字内容和位置
+            ctx.fillText(top3, 250, 1540); // 修改文字内容和位置
+        }
+        
 
         //展示圖片
         var dataURL = canvas.toDataURL('image/jpeg');
