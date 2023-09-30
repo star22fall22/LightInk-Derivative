@@ -29,9 +29,9 @@ createImg = function() {
         ctx.font = 'bold 72px 微軟正黑體';
         ctx.fillStyle = 'white';
         if (typesetting.value == 'books'){
-            ctx.fillText(top1, 250, 950); // 修改文字内容和位置
-            ctx.fillText(top2, 250, 1250); // 修改文字内容和位置
-            ctx.fillText(top3, 250, 1550); // 修改文字内容和位置
+            ctx.fillText(top1, 260, 955); // 修改文字内容和位置
+            ctx.fillText(top2, 260, 1260); // 修改文字内容和位置
+            ctx.fillText(top3, 260, 1565); // 修改文字内容和位置
         }
         else{
             ctx.fillText(top1, 250, 940); // 修改文字内容和位置
