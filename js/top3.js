@@ -38,6 +38,11 @@ createImg = function() {
             ctx.fillText(top2, 250, 1240); 
             ctx.fillText(top3, 250, 1540); 
         }
+        else if (typesetting.value == 'map'){ //心靈地圖
+            ctx.fillText(top1, 245, 980); 
+            ctx.fillText(top2, 2300, 1275); 
+            ctx.fillText(top3, 245, 1585); 
+        }
         
 
         //展示圖片
