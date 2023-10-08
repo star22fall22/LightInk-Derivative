@@ -39,9 +39,9 @@ createImg = function() {
             ctx.fillText(top3, 250, 1540); 
         }
         else if (typesetting.value == 'map'){ //心靈地圖
-            ctx.fillText(top1, 245, 980); 
-            ctx.fillText(top2, 335, 1275); 
-            ctx.fillText(top3, 245, 1585); 
+            ctx.fillText(top1, 235, 980); 
+            ctx.fillText(top2, 325, 1275); 
+            ctx.fillText(top3, 235, 1585); 
         }
         
 
