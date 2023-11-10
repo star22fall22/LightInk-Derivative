@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>待墨濃時 - 稿件參考線產生器</title>
+  <link rel="icon" href="../../img/icon.ico" type="image/x-icon">
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="../../css/templatemo-style.css">                                     <!-- Templatemo style -->
+  <link rel="stylesheet" href="../../css/loader.css">
+  <script src="../../js/refGen.js"></script>
+
+  <script>
+    var renderPage = true;
+
+    if(navigator.userAgent.indexOf('MSIE')!==-1
+      || navigator.appVersion.indexOf('Trident/') > 0){
+        /* Microsoft Internet Explorer detected in. */
+        alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+        renderPage = false;
+    }
+  </script>
+
+  <style>
+    #storyBox{
+      height: 272px;
+    }
+    /* #canvasCont{
+      width: 300px;
+    } */
+    @media only screen and (max-width:767px) {
+      #canvasCont { padding: 20px 15px; }
+    }
+    #myCanvas, #imgtest {
+      width: 100%; /* Canvas宽度为div的100% */
+      height: auto; /* 让Canvas的高度自动调整以保持纵横比 */
+      display: block; /* 去除默认的行内元素样式 */
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+  <div id="overlay">
+    <div id="loader2" class="loader2"></div>
+  </div>
+
+  <div class="container">
+
+      <p>&nbsp;</p>
+
+      <!-- 6th Section -->
+<section class="row">
+  <div class="col-lg-12 tm-form-header pl-5 pr-5">
+    <h2 class="tm-container-inner tm-text-color-white">稿件參考線產生器 -(功能開發中)</h2>
+  </div>
+  <div class="col-lg-12 pl-2 pl-sm-3 pl-md-5 pr-2 pr-sm-3 pr-md-5">
+    <form action="#" method="get" class="row tm-container-inner tm-contact-form">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <p>&#10070; 印刷類別</p>
+        <div class="form-group">
+          <select id = "print_type" onchange="selectType()">
+            <option value="choose">請選擇</option>
+            <option value="onePage">【單張】名片、卡片、海報</option>
+            <option value="twoPage">【書籍】膠裝、騎馬釘</option>
+            <option value="circle">【周邊】圓形徽章、圓形杯墊</option>
+          </select>
+        </div>
+
+        <p id="custom_title" style="display:none">&#10070; 稿件尺寸</p>
+
+        <!--書封-->
+        <div id="book" style="display:none">
+          <div class="form-group">
+            <input type="number" id="custom_width_b" autocomplete="off" class="form-control" placeholder="寬度（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_height_b" autocomplete="off" class="form-control" placeholder="高度（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_back_b" autocomplete="off" class="form-control" placeholder="書背尺寸（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_fold_b" autocomplete="off" class="form-control" placeholder="折口尺寸（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_bleed_b" autocomplete="off" class="form-control" placeholder="出血尺寸（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_dpi_b" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+          </div>
+        </div>
+        
+        <!--卡片、海報、單面-->
+        <div id="card" style="display:none">
+          <div class="form-group">
+            <input type="number" id="custom_width_c" autocomplete="off" class="form-control" placeholder="寬度（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_height_c" autocomplete="off" class="form-control" placeholder="高度（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_bleed_c" autocomplete="off" class="form-control" placeholder="出血尺寸（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_dpi_c" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+          </div>
+        </div>
+        
+        <!--圓形徽章、磁鐵-->
+        <div id="badge" style="display:none">
+          <div class="form-group">
+            <input type="number" id="custom_diameter_bd" autocomplete="off" class="form-control" placeholder="直徑（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_bleed_bd" autocomplete="off" class="form-control" placeholder="出血尺寸（mm）"/>
+          </div>
+          <div class="form-group">
+            <input type="number" id="custom_dpi_bd" autocomplete="off" class="form-control" placeholder="解析度（dpi）"/>
+          </div>
+        </div>
+        
+        <p>&#10070; 檔案尺寸 <a href="javascript:getAnswer()">↺</a></p>
+        <div class="form-group" >
+          <input type="text" id="answer" autocomplete="off" class="form-control" placeholder="檔案尺寸" disabled/>
+        </div>
+
+        <div class="col-xs-12 mt-4 tm-center">
+          <button class="btn btn-primary" onclick="createImg()"><font size="4">生成</font></button>
+          <button class="btn btn-primary" id="dwnImgButton" onclick="dwnImg()" disabled><font size="4">JPEG</font></button>
+          <button class="btn btn-primary" id="dwnPsdButton" onclick="dwnPsd()" disabled><font size="4">PSD</font></button>
+        </div>
+      </div>
+
+      
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" id="canvasCont" style="display: none;" >
+        <!-- <canvas id="myCanvas" width="342" height="608"></canvas> -->
+        <canvas id="myCanvas" width="1080" height="1920" style="display: none;"></canvas>
+        <img src="" id="imgtest" >
+      </div>
+      
+    </form>
+  </div>
+  <div class="col-lg-12 tm-bg-color-gray tm-text-color-white tm-font-thin tm-form-footer">
+    <div class="row tm-container-inner">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <h4></h4>
+          <address></address>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="tm-footer-info-box">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- Footer -->
+      <div class="row">
+          <div class="col-lg-12">
+              <p class="text-center small tm-copyright-text mb-0">Last edit 2023/11/10 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> star_fall22 | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+          </div>
+      </div>
+  </div>
+<!-- load JS -->
+<script src="../../js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+<script>
+
+  /* DOM is ready
+  ------------------------------------------------*/
+  $(function(){
+
+    if(renderPage) {
+      $('body').addClass('loaded');
+    }
+
+    $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+  });
+
+</script>
+
+</body>
+</html>
