@@ -33,7 +33,7 @@ function selectType(){
 }
 
 
-// ['長方形或圓形', 稿寬, 稿高, 直參考線1位置, 直參考線2位置, 橫參考線1位置, 橫參考線2位置]
+// ['長方形或圓形', 稿寬, 稿高, 直參考線1位置, 直參考線2位置, 橫參考線1位置, 橫參考線2位置, 參考線寬度]
 function getAnswer(){
     const print_type = document.getElementById("print_type").value;
     const answer = document.getElementById("answer");
@@ -53,8 +53,11 @@ function getAnswer(){
         ans_w = Math.ceil((Number(custom_diameter_bd) + 2 * Number(custom_bleed_bd) ) / 25.4 * Number(custom_dpi_bd));
         ans_h = ans_w;
         answer.value = "寬度 " + String(ans_w) + " px；高度 " + String(ans_h) + " px";
-        return ['bd'];
-        //畫布怎麼畫圓形?
+
+        redi = Number(custom_diameter_bd) / 25.4 * Number(custom_dpi_bd);
+
+        return ['bd', ans_w, ans_w, redi];
+        //['bd', 邊長, 邊長, 小的半徑]
 
     } else if (print_type == "onePage") {
         //卡片明信片海報
@@ -90,13 +93,13 @@ function getAnswer(){
             answer.value = "檔案尺寸";
             return null;
         }
-        ans_w = Math.ceil((Number(custom_width_b) + Number(custom_back_b) + 2 * Number(custom_fold_b) + 2 * Number(custom_bleed_b) ) / 25.4 * Number(custom_dpi_b));
+        ans_w = Math.ceil(((Number(custom_width_b)  + Number(custom_fold_b) + Number(custom_bleed_b)) * 2 + Number(custom_back_b)) / 25.4 * Number(custom_dpi_b));
         ans_h = Math.ceil((Number(custom_height_b) + 2 * Number(custom_bleed_b) ) / 25.4 * Number(custom_dpi_b));
         answer.value = "寬度 " + String(ans_w) + " px；高度 " + String(ans_h) + " px";
 
         ref_horizon_1 = Math.ceil(Number(custom_bleed_b) / 25.4 * Number(custom_dpi_b));
-        ref_horizon_2 = Math.ceil(Number(custom_bleed_b) + Number(custom_fold_b) / 25.4 * Number(custom_dpi_b));
-        ref_horizon_3 = Math.ceil(Number(custom_bleed_b) + Number(custom_fold_b) + Number(custom_width_b) / 25.4 * Number(custom_dpi_b));
+        ref_horizon_2 = Math.ceil((Number(custom_bleed_b) + Number(custom_fold_b)) / 25.4 * Number(custom_dpi_b));
+        ref_horizon_3 = Math.ceil((Number(custom_bleed_b) + Number(custom_fold_b) + Number(custom_width_b)) / 25.4 * Number(custom_dpi_b));
         ref_horizon_4 = ans_w - ref_horizon_3;
         ref_horizon_5 = ans_w - ref_horizon_2;
         ref_horizon_6 = ans_w - ref_horizon_1;
@@ -126,17 +129,122 @@ createImg = function(){
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext('2d');
 
-    if (ref[0] == 'c'){
-        // 卡片明信片海報
-        
-        
-    } else if (ref[0] == 'b'){
-        //書封
+    // 取得稿件長寬並填上白色
+    canvas.width = ref[1]; // 设置宽度
+    canvas.height = ref[2]; // 设置高度
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    } else if (ref[0] == 'bd'){
-        //圓形徽章
+    if (ref[0] == 'c'){  /////// 卡片明信片海報
+        // 填上灰色底色
+        ctx.fillStyle = "#d9d9d9";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 參考線
+        ctx.strokeStyle = "#00ffff";
+        ctx.lineWidth = ref[3] / 8;
+
+        ctx.beginPath(); //垂直1
+        ctx.moveTo(ref[3], 0);
+        ctx.lineTo(ref[3], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直2
+        ctx.moveTo(ref[4], 0);
+        ctx.lineTo(ref[4], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //水平2
+        ctx.moveTo(0, ref[5]);
+        ctx.lineTo(ref[1], ref[5]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //水平2
+        ctx.moveTo(0, ref[6]);
+        ctx.lineTo(ref[1], ref[6]);
+        ctx.stroke();
+        ctx.closePath();
+        
+    } else if (ref[0] == 'b'){ ///////書封
+        // 填上灰色底色
+        ctx.fillStyle = "#d9d9d9";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 參考線
+        ctx.strokeStyle = "#00ffff";
+        ctx.lineWidth = ref[3] / 8;
+
+        ctx.beginPath(); //垂直1
+        ctx.moveTo(ref[3], 0);
+        ctx.lineTo(ref[3], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直2
+        ctx.moveTo(ref[4], 0);
+        ctx.lineTo(ref[4], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直3
+        ctx.moveTo(ref[5], 0);
+        ctx.lineTo(ref[5], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直4
+        ctx.moveTo(ref[6], 0);
+        ctx.lineTo(ref[6], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直5
+        ctx.moveTo(ref[7], 0);
+        ctx.lineTo(ref[7], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //垂直6
+        ctx.moveTo(ref[8], 0);
+        ctx.lineTo(ref[8], ref[2]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //水平1
+        ctx.moveTo(0, ref[9]);
+        ctx.lineTo(ref[1], ref[9]);
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath(); //水平2
+        ctx.moveTo(0, ref[10]);
+        ctx.lineTo(ref[1], ref[10]);
+        ctx.stroke();
+        ctx.closePath();
+
+    } else if (ref[0] == 'bd'){ //////圓形徽章
+        
+        // 填上灰色底色
+        ctx.fillStyle = "#d9d9d9";
+        ctx.beginPath();
+        ctx.arc(ref[1]/2, ref[1]/2, ref[1]/2, 0, 2*Math.PI);
+        ctx.fill();
+        ctx. closePath();
+
+        // 參考線
+        ctx.strokeStyle = "#00ffff";
+        ctx.lineWidth = (ref[1]/2 - ref[3]/2) / 16;
+
+        ctx.beginPath();
+        ctx.arc(ref[1]/2, ref[1]/2, ref[3]/2, 0, 2*Math.PI);
+        ctx.stroke();
+        ctx.closePath();
 
     }
+
 
 
     //展示圖片
@@ -153,77 +261,12 @@ createImg = function(){
     overlay.style.display = "none";
     loader.style.display = "none";
 
+    //畫面滾到imgtest
+    myimg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    loader.style.display = "none";
+
     return;
 }
-
-
-/*
-createImg = function() {
-    var loader = document.getElementById("loader2");
-    var overlay = document.getElementById("overlay")
-    loader.style.display = "flex";
-    overlay.style.display = "flex";
-
-    // 获取Canvas元素和上下文
-    var canvas = document.getElementById('myCanvas');
-    var ctx = canvas.getContext('2d');
-
-    //取得top3文字
-    var top1 = document.getElementById("top1").value.substr(0,9);
-    var top2 = document.getElementById("top2").value.substr(0,9);
-    var top3 = document.getElementById("top3").value.substr(0,9);
-
-    //取得主題
-    var theme = document.getElementById("theme");
-    var typesetting = document.getElementById("typesetting"); 
-
-    // 创建一个Image对象来加载jpg底图
-    const backgroundImage = new Image();
-    backgroundImage.src = '../../img/tool-top3/'+String(theme.value)+'_' + String(typesetting.value) +'.jpg'; // 将文件名替换为您的底图文件名
-
-    // 在图像加载完成后绘制它
-    backgroundImage.onload = function() {
-        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
-        // 添加文字
-        ctx.font = 'bold 72px 微軟正黑體';
-        ctx.fillStyle = 'white';
-        if (typesetting.value == 'books'){ //奇幻書屋
-            ctx.fillText(top1, 250, 965); 
-            ctx.fillText(top2, 250, 1275); 
-            ctx.fillText(top3, 250, 1585); 
-        }
-        else if (typesetting.value == 'ticket'){ //長途車票
-            ctx.fillText(top1, 250, 940); 
-            ctx.fillText(top2, 250, 1240); 
-            ctx.fillText(top3, 250, 1540); 
-        }
-        else if (typesetting.value == 'map'){ //心靈地圖
-            ctx.fillText(top1, 235, 980); 
-            ctx.fillText(top2, 325, 1275); 
-            ctx.fillText(top3, 235, 1585); 
-        }
-        
-
-        //展示圖片
-        var dataURL = canvas.toDataURL('image/jpeg');
-        document.getElementById("canvasCont").style.display = "unset";
-        var myimg = document.getElementById('imgtest')
-        myimg.src=dataURL
-
-        // 可下載圖片
-        const dwnButton = document.getElementById("dwnButton");
-        dwnButton.disabled = false;
-
-        //加載結束
-        overlay.style.display = "none";
-        loader.style.display = "none";
-
-        //畫面滾到imgtest
-        myimg.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        loader.style.display = "none";
-    };
-};
 
 dwnImg = function() {
     // 创建一个 Date 对象，它将包含当前的日期和时间
@@ -241,12 +284,10 @@ dwnImg = function() {
     var dataURL = canvas.toDataURL('image/jpeg');
     var a = document.createElement('a');
     a.href = dataURL;
-    a.download = 'top3_'+ year + month + day + hours + minutes + seconds + '.jpg';
+    a.download = 'reference_'+ year + month + day + hours + minutes + seconds + '.jpg';
     a.click();
     // var myimg = document.getElementById('imgtest')
     // myimg.src=dataURL
 
     canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
-  
-*/
