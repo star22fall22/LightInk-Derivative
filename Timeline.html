@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>待墨濃時 - 更新日誌</title>
+    <link rel="icon" href="./img/icon.ico" type="image/x-icon">
+
+    <!-- load CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                        <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/templatemo-style.css">                                     <!-- Templatemo style -->
+    <link href="./album/bootstrap.min.css" rel="stylesheet">
+    <link href="./album/flexslider.css" rel="stylesheet">
+    <link href="./album/prettyPhoto.css" rel="stylesheet">
+    <link href="./album/style.css" rel="stylesheet">
+    <script src="./album/all.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./album/common.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./album/util.js"></script>
+
+
+    <script>
+        var renderPage = true;
+
+        if (navigator.userAgent.indexOf('MSIE') !== -1
+            || navigator.appVersion.indexOf('Trident/') > 0) {
+            /* Microsoft Internet Explorer detected in. */
+            alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+            renderPage = false;
+        }
+    </script>
+    <script>
+        window.addEventListener("DOMContentLoaded",() => {
+        const ctl = new CollapsibleTimeline("#timeline");
+    });
+
+    class CollapsibleTimeline {
+        constructor(el) {
+            this.el = document.querySelector(el);
+
+            this.init();
+        }
+        init() {
+            this.el?.addEventListener("click",this.itemAction.bind(this));
+        }
+        animateItemAction(button,ctrld,contentHeight,shouldCollapse) {
+            const expandedClass = "timeline__item-body--expanded";
+            const animOptions = {
+                duration: 300,
+                easing: "cubic-bezier(0.65,0,0.35,1)"
+            };
+
+            if (shouldCollapse) {
+                button.ariaExpanded = "false";
+                ctrld.ariaHidden = "true";
+                ctrld.classList.remove(expandedClass);
+                animOptions.duration *= 2;
+                this.animation = ctrld.animate([
+                    { height: `${contentHeight}px` },
+                    { height: `${contentHeight}px` },
+                    { height: "0px" }
+                ],animOptions);
+            } else {
+                button.ariaExpanded = "true";
+                ctrld.ariaHidden = "false";
+                ctrld.classList.add(expandedClass);
+                this.animation = ctrld.animate([
+                    { height: "0px" },
+                    { height: `${contentHeight}px` }
+                ],animOptions);
+            }
+        }
+        itemAction(e) {
+            const { target } = e;
+            const action = target?.getAttribute("data-action");
+            const item = target?.getAttribute("data-item");
+
+            if (action) {
+                const targetExpanded = action === "expand" ? "false" : "true";
+                const buttons = Array.from(this.el?.querySelectorAll(`[aria-expanded="${targetExpanded}"]`));
+                const wasExpanded = action === "collapse";
+
+                for (let button of buttons) {
+                    const buttonID = button.getAttribute("data-item");
+                    const ctrld = this.el?.querySelector(`#item${buttonID}-ctrld`);
+                    const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+                    this.animateItemAction(button,ctrld,contentHeight,wasExpanded);
+                }
+
+            } else if (item) {
+                const button = this.el?.querySelector(`[data-item="${item}"]`);
+                const expanded = button?.getAttribute("aria-expanded");
+
+                if (!expanded) return;
+
+                const wasExpanded = expanded === "true";
+                const ctrld = this.el?.querySelector(`#item${item}-ctrld`);
+                const contentHeight = ctrld.firstElementChild?.offsetHeight;
+
+                this.animateItemAction(button,ctrld,contentHeight,wasExpanded);
+            }
+        }
+    }
+    </script>
+    <style>
+        * {
+        border: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    :root {
+        --hue: 223;
+        --bg: hsl(var(--hue),10%,90%);
+        --fg: hsl(var(--hue),10%,10%);
+        --primary: hsl(var(--hue),90%,50%);
+        --trans-dur: 0.3s;
+        --trans-timing: cubic-bezier(0.65,0,0.35,1);
+        font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320));
+    }
+
+    .timeline {
+        margin: auto;
+        padding: 0 1.5em;
+        width: 100%;
+        max-width: 36em;
+    }
+    .timeline__arrow {
+        color: #993333;
+        background-color: transparent;
+        border-radius: 0.25em;
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-inline-end: 0.25em;
+        outline: transparent;
+        width: 2em;
+        height: 2em;
+        transition:
+            background-color calc(var(--trans-dur) / 2) linear,
+            color var(--trans-dur);
+        -webkit-appearance: none;
+        appearance: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .timeline__arrow:focus-visible,
+    .timeline__arrow:hover {
+        background-color: hsl(var(--hue),10%,50%,0.2);
+    }
+    .timeline__arrow-icon {
+        display: block;
+        pointer-events: none;
+        transform: rotate(-90deg);
+        transition: transform var(--trans-dur) var(--trans-timing);
+        width: 100%;
+        height: auto;
+    }
+    .timeline__date {
+        font-size: 0.833em;
+        line-height: 2.4;
+    }
+    .timeline__dot {
+        background-color: #993333;
+        border-radius: 50%;
+        display: inline-block;
+        flex-shrink: 0;
+        margin: 0.625em 0;
+        margin-inline-end: 1em;
+        position: relative;
+        width: 0.75em;
+        height: 0.75em;
+    }
+    .timeline__item {
+        position: relative;
+        padding-bottom: 2em;
+    }
+    .timeline__item a{
+        color: #993333;
+    }
+    .timeline__item:not(:last-child):before {
+        background-color: #993333;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 2.625em;
+        width: 0.125em;
+        height: 100%;
+        transform: translateX(-50%);
+    }
+    [dir="rtl"] .timeline__arrow-icon {
+        transform: rotate(90deg);
+    }
+    [dir="rtl"] .timeline__item:not(:last-child):before {
+        right: 2.625em;
+        left: auto;
+        transform: translateX(50%);
+    }
+    .timeline__item-header {
+        display: flex;
+    }
+    .timeline__item-body {
+        border-radius: 0.375em;
+        overflow: hidden;
+        margin-top: 0.5em;
+        margin-inline-start: 4.5em;
+        height: 0;
+    }
+    .timeline__item-body-content {
+        background-color: hsl(var(--hue),10%,50%,0); /*0.2*/
+        opacity: 0;
+        /*padding: 0.5em 0.75em;*/
+        visibility: hidden;
+        transition:
+            opacity var(--trans-dur) var(--trans-timing),
+            visibility var(--trans-dur) steps(1,end);
+    }
+    .timeline__meta {
+        width: 100%;
+    }
+    .timeline__title {
+        font-size: 20px;
+        line-height: 1.333;
+    }
+    /* Expanded state */
+    .timeline__item-body--expanded {
+        height: auto;
+    }
+    .timeline__item-body--expanded .timeline__item-body-content {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: var(--trans-dur), 0s;
+    }
+    .timeline__arrow[aria-expanded="true"] .timeline__arrow-icon {
+        transform: rotate(0);
+    }
+
+    /* Dark theme */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: hsl(var(--hue),10%,10%);
+            --fg: hsl(var(--hue),10%,90%);
+            --primary: hsl(var(--hue),90%,70%);
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div id="loader-wrapper">
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <div class="container">
+        <!-- 4th Section -->
+        <section class="row tm-section tm-mb-30">
+            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
+                    <div class="tm-md-flex-center">
+                        <svg display="none">
+                            <symbol id="arrow">
+                                <polyline points="7 10,12 15,17 10" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                            </symbol>
+                        </svg>
+                        <h2 class="mb-4 tm-text-color-primary"><strong>更新日誌</strong> </h2>
+                        <br>
+                        <div id="timeline" class="timeline">
+                            <!--
+                            <div class="btn-group">
+                                <button class="btn" type="button" data-action="expand">Expand All</button>
+                                <button class="btn" type="button" data-action="collapse">Collapse All</button>
+                            </div>
+                            -->
+                            <div class="timeline__item">
+                                <div class="timeline__item-header">
+                                    <button class="timeline__arrow" type="button" id="item1" aria-labelledby="item1-name" aria-expanded="false" aria-controls="item1-ctrld" aria-haspopup="true" data-item="1">
+                                        <svg class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                                            <use href="#arrow" />
+                                        </svg>
+                                    </button>
+                                    <span class="timeline__dot"></span>
+                                    <span id="item1-name" class="timeline__meta">
+                                        <time class="timeline__date" datetime="2023-11-04">2023/11/4</time><br>
+                                        <strong class="timeline__title">介面調整</strong>
+                                    </span>
+                                </div>
+                                <div class="timeline__item-body" id="item1-ctrld" role="region" aria-labelledby="item1" aria-hidden="true">
+                                    <div class="timeline__item-body-content">
+                                        <p class="timeline__item-p">文章頁面於手機板顯示時減少邊框寬度。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline__item">
+                                <div class="timeline__item-header">
+                                    <button class="timeline__arrow" type="button" id="item2" aria-labelledby="item2-name" aria-expanded="false" aria-controls="item2-ctrld" aria-haspopup="true" data-item="2">
+                                        <svg class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                                            <use href="#arrow" />
+                                        </svg>
+                                    </button>
+                                    <span class="timeline__dot"></span>
+                                    <span id="item1-name" class="timeline__meta">
+                                        <time class="timeline__date" datetime="2023-09-01">2023/9/1</time><br>
+                                        <strong class="timeline__title">表情符號抽抽樂上架</strong>
+                                    </span>
+                                </div>
+                                <div class="timeline__item-body" id="item2-ctrld" role="region" aria-labelledby="item2" aria-hidden="true">
+                                    <div class="timeline__item-body-content">
+                                        <p class="timeline__item-p">新增<a href="./Draw_emo.html">「表情符號抽抽樂」</a>功能。</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline__item">
+                                <div class="timeline__item-header">
+                                    <button class="timeline__arrow" type="button" id="item3" aria-labelledby="item3-name" aria-expanded="false" aria-controls="item3-ctrld" aria-haspopup="true" data-item="3">
+                                        <svg class="timeline__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                                            <use href="#arrow" />
+                                        </svg>
+                                    </button>
+                                    <span class="timeline__dot"></span>
+                                    <span id="item1-name" class="timeline__meta">
+                                        <time class="timeline__date" datetime="2021-09-18">2021/9/18</time><br>
+                                        <strong class="timeline__title">今日宜閱讀OO本上架</strong>
+                                    </span>
+                                </div>
+                                <div class="timeline__item-body" id="item3-ctrld" role="region" aria-labelledby="item3" aria-hidden="true">
+                                    <div class="timeline__item-body-content">
+                                        <p class="timeline__item-p">新增<a href="./Draw.html">「今日宜閱讀OO本」</a>功能。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="text-center small tm-copyright-text mb-0">Last edit 2023/12/30 | Built by 墨兒 <br />Copyright &copy; <span class="tm-current-year">2018</span> Your Company Name | Designed by <a href="http://templatemo.com" class="tm-text-color-gray" target="_parent">Template Mo</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- load JS -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+    <script>
+
+        /* DOM is ready
+        ------------------------------------------------*/
+        $(function () {
+
+            if (renderPage) {
+                $('body').addClass('loaded');
+            }
+
+            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+        });
+
+    </script>
+
+    <script src="./album/jquery-1.10.2.min.js"></script>
+    <script src="./album/bootstrap.min.js"></script>
+    <script src="./album/js"></script>
+    <script src="./album/jquery.ui.map.min.js"></script>
+    <script src="./album/jquery.mixitup.min.js"></script>
+    <script src="./album/jquery.prettyPhoto.js"></script>
+    <script src="./album/jquery.parallax-1.1.3.js"></script>
+    <script src="./album/jquery.flexslider-min.js"></script>
+    <script src="./album/scrolld.min.js"></script>
+    <script src="./album/scripts.js"></script>
+
+</body>
+</html>
